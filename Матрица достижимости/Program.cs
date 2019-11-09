@@ -11,6 +11,7 @@ namespace Матрица_достижимости
     {
         static void Main(string[] args)
         {
+            //Hello!!!
 
             bool[,] S = new bool[1,1];
             bool init = false;
