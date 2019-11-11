@@ -24,7 +24,7 @@ namespace Матрица_достижимости
             int n = 0;
 
             foreach (string line in File.ReadLines(file))
-            {
+            {                
                 if (!init)
                 {
                     size = line.Length;                    
