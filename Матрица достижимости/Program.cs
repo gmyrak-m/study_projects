@@ -102,9 +102,6 @@ namespace Матрица_достижимости
             return result;
         }
 
-
-
-
         static void Main(string[] args)
         {
 
@@ -122,8 +119,5 @@ namespace Матрица_достижимости
             writeMatrix(S, "output.txt");
 
         }
-
-        
-
     }
 }
