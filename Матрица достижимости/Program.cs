@@ -9,45 +9,92 @@ namespace Матрица_достижимости
 {
     class Program
     {
-        static void Main(string[] args)
+        struct matrix 
         {
-            //Hello!!!
-            // fix1
+            public int range;
+            public bool[,] data;
+        }
 
-            bool[,] S = new bool[1,1];
-            bool init = false;
-            int RANGE = 0;
+        static matrix readMatrix(string file) 
+        {            
+            
+            int size = 0;
+            bool[,] data = new bool[1,1];
+            bool init = false;            
             int n = 0;
 
-            foreach (string line in File.ReadLines("Смежность.txt"))
+            foreach (string line in File.ReadLines(file))
             {
                 if (!init)
                 {
-                    RANGE = line.Length;
+                    size = line.Length;                    
+                    data = new bool[size, size];                    
                     init = true;
-                    S = new bool[RANGE, RANGE];
                 }
 
-                for(int m=0; m< RANGE; m++)
+                for(int m=0; m< size; m++)
                 {
-                    S[n, m] = line[m] == '1';
+                    data[n, m] = line[m] == '1';
                 }
                 n++;
             }
 
-            string[] output = new string[RANGE];
+            matrix result;
+            result.data = data;
+            result.range = size;
+            return result;
+        }
 
-            for(int i=0; i<RANGE; i++)
+        static void writeMatrix(matrix m, string file)
+        {     
+            string[] output = new string[m.range];
+
+            for(int i=0; i<m.range; i++)
             {
                 string line = "";
-                for(int j=0; j<RANGE; j++)
+                for(int j=0; j<m.range; j++)
                 {
-                    line += " " + S[i, j];
+                    line += m.data[i, j] ? '1': '0';
                 }
                 output[i] = line;
-
             }
-            File.WriteAllLines("Достижимость.txt", output);
+            File.WriteAllLines(file, output);
+
         }
+
+        static matrix mult(matrix A, matrix B) 
+        {
+            int N = A.range;
+            bool[,] M = new bool[N, N];
+
+            for(int i=0; i<N; i++) {
+            for(int j=0; j<N; j++) {
+                    bool s = false;
+                    for(int k=0; k<N; k++) {
+                        s |= A.data[i,k] & B.data[k,j];
+                    }
+                    M[i, j] = s;
+                }
+            }
+
+            matrix result;
+            result.data = M;
+            result.range = N;
+            return result;
+        }
+
+
+
+
+        static void Main(string[] args)
+        {
+
+            matrix M = readMatrix("Смежность.txt");
+            writeMatrix(M, "Достижимость.txt");
+
+        }
+
+        
+
     }
 }
