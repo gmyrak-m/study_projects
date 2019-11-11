@@ -63,12 +63,14 @@ namespace Матрица_достижимости
         }
 
         static matrix mult(matrix A, matrix B) 
-        {
+        {           
             int N = A.range;
             bool[,] M = new bool[N, N];
 
-            for(int i=0; i<N; i++) {
-            for(int j=0; j<N; j++) {
+            for(int i=0; i<N; i++) 
+            {
+                for(int j=0; j<N; j++) 
+                {
                     bool s = false;
                     for(int k=0; k<N; k++) {
                         s |= A.data[i,k] & B.data[k,j];
@@ -83,14 +85,41 @@ namespace Матрица_достижимости
             return result;
         }
 
+        static matrix plus(matrix A, matrix B)
+        {
+            int N = A.range;
+            bool[,] M = new bool[N, N];
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    M[i, j] = A.data[i, j] | B.data[i, j];
+                }
+            }
+            matrix result;
+            result.data = M;
+            result.range = N;
+            return result;
+        }
+
 
 
 
         static void Main(string[] args)
         {
 
-            matrix M = readMatrix("Смежность.txt");
-            writeMatrix(M, "Достижимость.txt");
+            matrix M = readMatrix("input.txt");
+            int size = M.range;
+            matrix S = M;
+            matrix Mn = M;
+
+            for (int i = 0; i < size-1; i++) 
+            {
+                Mn = mult(Mn, M);
+                S = plus(S, Mn);
+            }
+
+            writeMatrix(S, "output.txt");
 
         }
 
