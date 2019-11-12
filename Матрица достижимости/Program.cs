@@ -103,8 +103,7 @@ namespace Матрица_достижимости
         }
 
         static void Main(string[] args)
-        {
-
+        {            
             matrix M = readMatrix("input.txt");
             int size = M.range;
             matrix S = M;
