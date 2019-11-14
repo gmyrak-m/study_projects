@@ -9,16 +9,14 @@ namespace Матрица_достижимости
 {
     class Program
     {
-        struct matrix 
-        {
-            public int range;
-            public bool[,] data;
-        }
 
-        static matrix readMatrix(string file) 
+        static int SIZE = 0;
+
+
+
+        static bool[,] readMatrix(string file) 
         {            
-            
-            int size = 0;
+                        
             bool[,] data = new bool[1,1];
             bool init = false;            
             int n = 0;
@@ -27,34 +25,31 @@ namespace Матрица_достижимости
             {                
                 if (!init)
                 {
-                    size = line.Length;                    
-                    data = new bool[size, size];                    
+                    SIZE = line.Length;                    
+                    data = new bool[SIZE, SIZE];                    
                     init = true;
                 }
 
-                for(int m=0; m< size; m++)
+                for(int m=0; m< SIZE; m++)
                 {
                     data[n, m] = line[m] == '1';
                 }
                 n++;
             }
 
-            matrix result;
-            result.data = data;
-            result.range = size;
-            return result;
+            return data;
         }
 
-        static void writeMatrix(matrix m, string file)
+        static void writeMatrix(bool[,] m, string file)
         {     
-            string[] output = new string[m.range];
+            string[] output = new string[SIZE];
 
-            for(int i=0; i<m.range; i++)
+            for(int i=0; i<SIZE; i++)
             {
                 string line = "";
-                for(int j=0; j<m.range; j++)
+                for(int j=0; j<SIZE; j++)
                 {
-                    line += m.data[i, j] ? '1': '0';
+                    line += m[i, j] ? '1': '0';
                 }
                 output[i] = line;
             }
@@ -62,55 +57,46 @@ namespace Матрица_достижимости
 
         }
 
-        static matrix mult(matrix A, matrix B) 
-        {           
-            int N = A.range;
-            bool[,] M = new bool[N, N];
+        static bool[,] mult(bool[,] A, bool[,] B) 
+        {                       
+            bool[,] M = new bool[SIZE, SIZE];
 
-            for(int i=0; i<N; i++) 
+            for(int i=0; i<SIZE; i++) 
             {
-                for(int j=0; j<N; j++) 
+                for(int j=0; j<SIZE; j++) 
                 {
                     bool s = false;
-                    for(int k=0; k<N; k++) {
-                        s |= A.data[i,k] & B.data[k,j];
+                    for(int k=0; k<SIZE; k++) {
+                        s |= A[i,k] & B[k,j];
                     }
                     M[i, j] = s;
                 }
             }
 
-            matrix result;
-            result.data = M;
-            result.range = N;
-            return result;
+            return M;
         }
 
-        static matrix plus(matrix A, matrix B)
+        static bool[,] plus(bool[,] A, bool[,] B)
         {
-            int N = A.range;
-            bool[,] M = new bool[N, N];
-            for (int i = 0; i < N; i++)
+            bool[,] M = new bool[SIZE, SIZE];
+            for (int i = 0; i < SIZE; i++)
             {
-                for (int j = 0; j < N; j++)
+                for (int j = 0; j < SIZE; j++)
                 {
-                    M[i, j] = A.data[i, j] | B.data[i, j];
+                    M[i, j] = A[i, j] | B[i, j];
                 }
             }
-            matrix result;
-            result.data = M;
-            result.range = N;
-            return result;
+            return M;
         }
 
         static void Main(string[] args)
         {
 
-            matrix M = readMatrix("input.txt");
-            int size = M.range;
-            matrix S = M;
-            matrix Mn = M;
+            bool[,] M = readMatrix("input.txt");            
+            bool[,] S = M;
+            bool[,] Mn = M;
 
-            for (int i = 0; i < size-1; i++) 
+            for (int i = 0; i < SIZE-1; i++) 
             {
                 Mn = mult(Mn, M);
                 S = plus(S, Mn);

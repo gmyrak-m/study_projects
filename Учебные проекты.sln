@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ромб", ".\ромб\ромб.csproj", "{4E35B693-D226-448A-AC32-1A2C6544D747}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ромб", "ромб\ромб.csproj", "{4E35B693-D226-448A-AC32-1A2C6544D747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Матрица достижимости", ".\Матрица достижимости\Матрица достижимости.csproj", "{0709F33A-62D3-4C47-A907-404B78B4CC58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Матрица достижимости", "Матрица достижимости\Матрица достижимости.csproj", "{0709F33A-62D3-4C47-A907-404B78B4CC58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Лаб 4", "Лаб 4\Лаб 4.csproj", "{C2071616-41F2-44A0-B0AF-AD37EB18A683}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0709F33A-62D3-4C47-A907-404B78B4CC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0709F33A-62D3-4C47-A907-404B78B4CC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0709F33A-62D3-4C47-A907-404B78B4CC58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2071616-41F2-44A0-B0AF-AD37EB18A683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2071616-41F2-44A0-B0AF-AD37EB18A683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2071616-41F2-44A0-B0AF-AD37EB18A683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2071616-41F2-44A0-B0AF-AD37EB18A683}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
