@@ -40,6 +40,26 @@ namespace Матрица_достижимости
             return data;
         }
 
+       
+        static bool[,] readMatrixCon()
+        {
+            String line = Console.ReadLine();
+            SIZE = line.Length;
+            bool[,] data = new bool[SIZE, SIZE];
+
+            for (int n = 0; n < SIZE; n++)
+            {
+                for (int m = 0; m < SIZE; m++)
+                {
+                    data[n, m] = line[m] == '1';
+                }
+                line = Console.ReadLine();
+            }
+            return data;
+        }
+      
+
+
         static void writeMatrix(bool[,] m, string file)
         {     
             string[] output = new string[SIZE];
@@ -54,8 +74,21 @@ namespace Матрица_достижимости
                 output[i] = line;
             }
             File.WriteAllLines(file, output);
-
         }
+
+        static void writeMatrixCon(bool[,] m)
+        {
+            for (int i = 0; i < SIZE; i++)
+            {
+                string line = "";
+                for (int j = 0; j < SIZE; j++)
+                {
+                    line += m[i, j] ? '1' : '0';
+                }
+                Console.WriteLine(line);
+            }
+        }
+
 
         static bool[,] mult(bool[,] A, bool[,] B) 
         {                       
@@ -89,21 +122,29 @@ namespace Матрица_достижимости
             return M;
         }
 
+        static bool[,] set1(bool [,] M)
+        {
+            for (int i=0; i<SIZE; i++)
+            {
+                M[i, i] = true;
+            }
+            return M;
+        }
+
         static void Main(string[] args)
         {
 
-            bool[,] M = readMatrix("input.txt");            
+            bool[,] M = readMatrixCon();
             bool[,] S = M;
             bool[,] Mn = M;
 
-            for (int i = 0; i < SIZE-1; i++) 
+            for (int i = 0; i < SIZE - 1; i++)
             {
                 Mn = mult(Mn, M);
                 S = plus(S, Mn);
             }
 
-            writeMatrix(S, "output.txt");
-
+            writeMatrixCon(set1(S));
         }
     }
 }

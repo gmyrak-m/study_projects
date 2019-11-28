@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Матрица достиж
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Лаб 4", "Лаб 4\Лаб 4.csproj", "{C2071616-41F2-44A0-B0AF-AD37EB18A683}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Иерархия", "Иерархия\Иерархия.csproj", "{A30506B5-43E8-44CB-9D0B-9E33A840744E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C2071616-41F2-44A0-B0AF-AD37EB18A683}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2071616-41F2-44A0-B0AF-AD37EB18A683}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2071616-41F2-44A0-B0AF-AD37EB18A683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A30506B5-43E8-44CB-9D0B-9E33A840744E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A30506B5-43E8-44CB-9D0B-9E33A840744E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A30506B5-43E8-44CB-9D0B-9E33A840744E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A30506B5-43E8-44CB-9D0B-9E33A840744E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
