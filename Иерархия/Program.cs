@@ -68,6 +68,16 @@ class Program
         return M;
     }
 
+    static void printSet(HashSet<int> s)
+    {
+        Console.Write("{");
+        foreach (int k in s)
+        {
+            Console.Write("{0},", k);
+        }
+        Console.Write("} ");
+    }
+
 
     static void Main(string[] args)
     {
@@ -81,7 +91,7 @@ class Program
             Mn = mult(Mn, SM);
             D = plus(D, Mn);
         }
-
+        //-------- получили матрицу достижимости ---------------
 
         HashSet<int>[,] COL = new HashSet<int>[SIZE, 3];
         for (int i = 0; i < SIZE; i++)
@@ -91,6 +101,8 @@ class Program
                 COL[i, j] = new HashSet<int>();
             }
         }
+        //--------- заполнили таблицу пустыми множествами -------------------
+
 
         for (int i = 0; i < SIZE; i++)
         {
@@ -99,6 +111,9 @@ class Program
                 if (D[i, j]) COL[i, 0].Add(j + 1);
             }
         }
+        // ------- заполнили 2-й столбец. Вершины, которых можно достичь из i-ой вершины. (Достижимые вершины)
+
+
 
         for (int j = 0; j < SIZE; j++)
         {
@@ -107,38 +122,60 @@ class Program
                 if (D[i, j]) COL[j, 1].Add(i + 1);
             }
         }
+        // ------- заполнили 3-й столбец. Вершины, из которые можно достигнуть i-ю вершину. (Вершины - предшественницы)
+
 
         for (int i = 0; i < SIZE; i++)
         {
             COL[i, 2] = new HashSet<int>(COL[i, 0]);
             COL[i, 2].IntersectWith(COL[i, 1]);
         }
+        //------ заполнили 4-й столбец. Достижимые вершины и вершины - предшественницы. (Общие вершины)
 
-
-        for (int i = 0; i < SIZE; i++)
+   
+        HashSet<int> exept = new HashSet<int>();
+        exept.Add(1);
+       
+        while (exept.Count > 0)
         {
-            for (int j = 0; j < 3; j++)
+
+            exept = new HashSet<int>();
+
+            for (int i = 0; i < SIZE; i++)
             {
-                foreach (int k in COL[i, j])
+                if (COL[i, 2].Count > 0)
                 {
-                    Console.Write("{0} ", k);
+                     if (COL[i, 1].SetEquals(COL[i, 2]))
+                    {
+                        exept.Add(i + 1);
+                    }
+                }
+            }
+
+            if (exept.Count > 0)
+            {
+                printSet(exept);
+                Console.WriteLine();
+
+                //------ Сравнили столбцы 3 и 4. Если совпадают, номера строк записали в exept (для последующего исключения).
+
+
+                for (int i = 0; i < SIZE; i++)
+                {
+                    if (COL[i, 2].Count > 0)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            COL[i, j].ExceptWith(exept);
+                        }
+                    }
 
                 }
-                Console.Write(" * ");
+                //--- Исключили числа найденные на предыдущем этапе
             }
-            Console.WriteLine();
-        }
 
-        Console.WriteLine();
-        for (int i = 0; i < SIZE; i++)
-        {
-            for (int j = 0; j < SIZE; j++)
-            {
-                Console.Write(D[i, j] ? 1 : 0);
-
-            }
-            Console.WriteLine();
         }
 
     }
 }
+    
